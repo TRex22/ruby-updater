@@ -14,7 +14,10 @@ module RubyUpdater
     end
 
     def latest_version(name)
-      versions(name).first
+      HTTParty.get(
+        "#{BASE_API_PATH}/versions/#{name}/latest.json",
+        headers: { 'Content-Type' => 'application/json' }
+      ).dig("version")
     end
   end
 end
