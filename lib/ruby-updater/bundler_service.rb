@@ -39,7 +39,7 @@ module RubyUpdater
     end
 
     def install(folder_path)
-      `cd #{folder_path} && bundle install`
+      `cd #{folder_path} && BUNDLE_PATH=#{folder_path} bundle install`
     end
 
     def update(folder_path)
@@ -75,7 +75,7 @@ module RubyUpdater
         .select { |line| line.include?("gem '") || line.include?("gem \"") }
         .map { |line|
           # split_line = line.gsub("gem '", '').split("', '")
-          split_line = line.gsub("gem '", '').gsub("  gem \"", '').gsub("gem '", '').gsub("\"", "'").split("', '")
+          split_line = line.gsub('gem ', '').gsub("gem '", '').gsub("  gem \"", '').gsub("gem '", '').gsub("\"", "'").split("', '")
           name = split_line[0].gsub("'", '')
 
           version = line.match(THREE_DIGIT_VALUE).to_s
