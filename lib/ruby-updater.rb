@@ -1,4 +1,5 @@
 require 'httparty'
+require 'pry'
 
 require 'ruby-updater/version'
 
