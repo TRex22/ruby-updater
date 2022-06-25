@@ -22,6 +22,10 @@ module RubyUpdater
       `cd #{folder_path} && git status`.include?('nothing to commit, working tree clean')
     end
 
+    def not_a_repo?(folder_path)
+      `cd #{folder_path} && git status`.include?('fatal: not a git repository')
+    end
+
     # This can be dangerous. Check #changes_pending? before making
     # destructive changes or roll-backs
     def reset_changes(folder_path)
