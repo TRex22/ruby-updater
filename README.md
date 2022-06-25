@@ -26,7 +26,8 @@ You will need to install `tesseract` with your desired language on your system,
 ```ruby
   require 'ruby-updater'
 
-
+  cli = RubyUpdater::Cli.new([path])
+  cli.call if cli.valid?
 ```
 
 ### Simple CLI
@@ -34,7 +35,7 @@ Once installed you can use `ruby-updater` as a CLI. Its currently a reduced set 
 
 ```
 # Basic Usage with console output
-
+ruby-updater path-to-repo
 ```
 
 ## Development
@@ -47,6 +48,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 - Run tests
 - Auto commit
 - yarn and package.json
+- make sure there is no stash to purge!
 
 ### Tests
 To run tests execute:
