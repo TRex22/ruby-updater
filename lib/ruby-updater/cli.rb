@@ -1,9 +1,10 @@
 module RubyUpdater
   class Cli
-    attr_reader :args
+    attr_reader :args, :folder_path
 
     def initialize(args)
       @args = args
+      @folder_path = args[0]
     end
 
     def valid?
@@ -23,7 +24,6 @@ module RubyUpdater
       abort 'Folder path is required!' if invalid?
 
       # Using default config for now
-      folder_path = args[0]
       puts "Folder path: #{folder_path}"
 
       abort 'git is not installed!' if RubyUpdater::GitService.not_present?
