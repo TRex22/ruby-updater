@@ -10,6 +10,14 @@ module RubyUpdater
       `git --version`.include?('git version')
     end
 
+    def stash_clear?(folder_path)
+      `cd #{folder_path} && git stash list` == ''
+    end
+
+    def stash_present?(folder_path)
+      !stash_clear?(folder_path)
+    end
+
     def branch_name(folder_path)
       `cd #{folder_path} && git status`.split("\n").first.gsub('On branch ', '')
     end

@@ -29,10 +29,11 @@ module RubyUpdater
       abort 'git is not installed!' if RubyUpdater::GitService.not_present?
       abort 'Destination folder is not a git repo!' if RubyUpdater::GitService.not_a_repo?(folder_path)
       abort 'Destination folder has pending changes!' if RubyUpdater::GitService.changes_pending?(folder_path)
+      abort 'Destination folder has a git stash!' if RubyUpdater::GitService.stash_present?(folder_path)
 
       # Check Gems with static version numbers
       gems_needing_updates = find_gem_updates_from_file
-      puts "Gems are up-to-date! :)" if gems_needing_updates == []
+      puts 'Gems are up-to-date! :)' if gems_needing_updates == []
 
       # Check that the Gemfile.lock has no updates
       RubyUpdater::BundlerService.remove_lockfile(folder_path)
@@ -42,8 +43,7 @@ module RubyUpdater
       # Get Changes
 
       # Reset changes
-      # TODO: Make this safe check for stash before!
-      RubyUpdater::GitService.reset_changes(folder_path)
+      # RubyUpdater::GitService.reset_changes(folder_path)
       binding.pry
     end
 

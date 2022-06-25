@@ -48,7 +48,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 - Run tests
 - Auto commit
 - yarn and package.json
-- make sure there is no stash to purge!
 
 ### Tests
 To run tests execute:
