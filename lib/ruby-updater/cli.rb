@@ -35,10 +35,14 @@ module RubyUpdater
       gems_needing_updates = find_gem_updates_from_file
       puts 'Gems are up-to-date! :)' if gems_needing_updates == []
 
+      gems_needing_updates.each do |name, local_version, current_version|
+        puts "#{name} #{local_version} --> #{current_version}"
+      end
+
       # Check that the Gemfile.lock has no updates
-      RubyUpdater::BundlerService.remove_lockfile(folder_path)
-      RubyUpdater::BundlerService.install(folder_path)
-      RubyUpdater::BundlerService.update(folder_path)
+      # RubyUpdater::BundlerService.remove_lockfile(folder_path)
+      # RubyUpdater::BundlerService.install(folder_path)
+      # RubyUpdater::BundlerService.update(folder_path)
 
       # Get Changes
 

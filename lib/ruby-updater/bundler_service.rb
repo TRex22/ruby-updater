@@ -59,14 +59,8 @@ module RubyUpdater
           split_line = line.split("', '")
           name = split_line[0].gsub("'", '')
 
-          version = split_line[1].to_s
-
-          if split_line.size > 2
-            version = split_line[1..split_line.size].join(' ')
-          end
-
-          version = version.match(THREE_DIGIT_VALUE).to_s
-          version = version.match(TWO_DIGIT_VALUE).to_s if version == ''
+          version = line.match(THREE_DIGIT_VALUE).to_s
+          version = line.match(TWO_DIGIT_VALUE).to_s if version == ''
 
           next if version == ''
 
@@ -78,18 +72,13 @@ module RubyUpdater
       lines
         .map(&:strip)
         .reject { |line| line[0] == '#' || line.include?('git:') }
-        .select { |line| line.include?("gem '") }
+        .select { |line| line.include?("gem '") || line.include?("gem \"") }
         .map { |line|
-          split_line = line.gsub("gem '", '').split("', '")
+          # split_line = line.gsub("gem '", '').split("', '")
+          split_line = line.gsub("gem '", '').gsub("  gem \"", '').gsub("gem '", '').gsub("\"", "'").split("', '")
           name = split_line[0].gsub("'", '')
 
-          version = split_line[1].to_s
-
-          if split_line.size > 2
-            version = split_line[1..split_line.size].join(' ')
-          end
-
-          version = version.match(THREE_DIGIT_VALUE).to_s
+          version = line.match(THREE_DIGIT_VALUE).to_s
           version = version.match(TWO_DIGIT_VALUE).to_s if version == ''
 
           next if version == ''
