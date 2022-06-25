@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby -wU
+
+require 'ruby-updater'
+
+RubyUpdater::Cli.new(ARGV).call
