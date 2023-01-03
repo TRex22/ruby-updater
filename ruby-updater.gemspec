@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   # Dependencies
   spec.add_dependency 'console-style', '~> 0.0.1'
 
-  spec.add_dependency 'httparty', '~> 0.20.0'
+  spec.add_dependency 'httparty', '>= 0.20', '< 0.22'
 
   # Development Dependencies
   spec.add_development_dependency 'pry', '~> 0.14.1'
